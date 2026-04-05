@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/hero_banner.png" alt="SkopaqTrader" style="max-width: 100%; height: auto;" />
+<img src="assets/hero_banner.svg" alt="AutoTrader" style="max-width: 100%; height: auto;" />
 
-# SkopaqTrader
+# AutoTrader
 
 **AI-powered algorithmic trading for Indian equities**
 
@@ -18,15 +18,15 @@
 
 ## What is this?
 
-SkopaqTrader is a multi-agent AI system that analyzes Indian equities and executes trades through the INDstocks broker API. A team of specialized LLM agents — market analyst, news analyst, social sentiment analyst, fundamentals analyst — debates each trade before a risk manager assigns a confidence score and a trader agent makes the final call.
+AutoTrader is a multi-agent AI system that analyzes Indian equities and executes trades through the INDstocks broker API. A team of specialized LLM agents — market analyst, news analyst, social sentiment analyst, fundamentals analyst — debates each trade before a risk manager assigns a confidence score and a trader agent makes the final call.
 
 The system runs unattended on a daily cron job (09:10 IST, weekdays via Railway), scans the NIFTY 50 for opportunities, and manages positions through EOD.
 
 **This is not a backtest-first quant system.** It's closer to a digital analyst desk that runs every morning, does its research, places a few high-conviction trades, and closes them out by 3:20 PM.
 
-Built on [TradingAgents v0.2.0](https://github.com/TauricResearch/TradingAgents) (Apache 2.0) with a custom `skopaq/` layer on top.
+Built on [TradingAgents v0.2.0](https://github.com/TauricResearch/TradingAgents) (Apache 2.0) with a custom execution and infrastructure layer on top.
 
-<img src="assets/dashboard.png" alt="Skopaq Dashboard" style="max-width: 100%; height: auto;" />
+<img src="assets/dashboard.png" alt="AutoTrader Dashboard" style="max-width: 100%; height: auto;" />
 
 ---
 
@@ -66,13 +66,13 @@ Morning cron (09:10 IST)
 ```mermaid
 graph TD
     subgraph CLI["Entry Points"]
-        A["skopaq CLI"]
+        A["autotrader CLI"]
         B["FastAPI /api"]
         C["Railway cron daemon"]
     end
 
     subgraph Core["Analysis Pipeline"]
-        D["SkopaqTradingGraph"]
+        D["TradingGraph"]
         E["TradingAgentsGraph (upstream)"]
         F["4 Analysts → 2 Researchers → Risk Debate → Trader"]
     end
@@ -135,7 +135,7 @@ graph TD
 
 ```bash
 git clone <repo>
-cd skopaqtrader
+cd autotrading
 
 python -m venv .venv
 source .venv/bin/activate
@@ -296,7 +296,7 @@ python -m pytest tests/unit/ --cov=skopaq --cov-report=term-missing
 ## Project structure
 
 ```
-skopaqtrader/
+autotrading/
 ├── skopaq/                    # Core extensions
 │   ├── agents/                # Sell analyst (AI exit decisions)
 │   ├── api/                   # FastAPI backend
